@@ -4,7 +4,7 @@ if(POLICY CMP0076)
    cmake_policy(SET CMP0076 NEW)
 endif()
 
-set (CMAKE_BUILD_TYPE Debug)
+set (CMAKE_BUILD_TYPE Release)
 unset (SRC_DIR CACHE)
 get_filename_component(ABSOLUTE_DIR "${PROJECT_SOURCE_DIR}"  REALPATH BASE_DIR )
 set (SRC_DIR "${ABSOLUTE_DIR}/src" CACHE STRING "SRC variable")
@@ -22,15 +22,15 @@ project(cpp-di)
 
 add_subdirectory (src) 
 
+set_target_properties(cpp_di PROPERTIES
+    VERSION 1
+    SOVERSION 1
+    PUBLIC_HEADER src/Injector.h)
 
-target_sources(xc_compiler
-   PRIVATE
-		src/Container.h
-		src/Container.cxx
-		src/Module.h
-		src/Module.cxx
-		src/Registration.h
-   PUBLIC
-		src/Injector.h
-)
-
+include(GNUInstallDirs)
+install(TARGETS cpp_di
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+	 PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cpp_di)
+	 
+configure_file(cpp_di.pc.in cpp_di.pc @ONLY)
+install(FILES ${CMAKE_BINARY_DIR}/cpp_di.pc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
