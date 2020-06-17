@@ -4,7 +4,7 @@
 #include <typeindex>
 #include <vector>
 
-namespace compiler::util::di
+namespace cpp_di
 {
 	class Container;
 
@@ -25,7 +25,7 @@ namespace compiler::util::di
 		/* Base class to allow templates of diff types to be stored in same lists/maps */
 		class RegistrationBase
 		{
-			friend class ::compiler::util::di::Container;
+			friend class ::cpp_di::Container;
 
 			template <class TYPE2, class... ARG2S>
 			friend class Registration;
@@ -46,4 +46,4 @@ namespace compiler::util::di
 
 
 	} // namespace registration
-} // namespace compiler::util::di
+} // namespace cpp_di

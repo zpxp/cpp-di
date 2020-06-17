@@ -1,6 +1,6 @@
 #include "Module.h"
 
-using namespace compiler::util::di;
+using namespace cpp_di;
 
 
 Module::Module()

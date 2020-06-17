@@ -10,7 +10,7 @@
 #include <vector>
 #include <memory>
 
-namespace compiler::util::di
+namespace cpp_di
 {
 	class Container;
 
@@ -31,7 +31,7 @@ namespace compiler::util::di
 		/* A class that holds registration meta data. the actual instances are stored in  `RegistrationInstance`*/
 		class Registration : public RegistrationBase
 		{
-			friend class ::compiler::util::di::Container;
+			friend class ::cpp_di::Container;
 
 			template <class TYPE2, class... ARG2S>
 			friend class Registration;
@@ -165,7 +165,7 @@ namespace compiler::util::di
 		/* a registration that actually holds its generated instances */
 		class RegistrationInstance : public Registration<TYPE, ARGS...>
 		{
-			friend class ::compiler::util::di::Container;
+			friend class ::cpp_di::Container;
 
 			template <class TYPE2, class... ARGS2>
 			friend class Registration;
@@ -254,4 +254,4 @@ namespace compiler::util::di
 
 	} // namespace registration
 
-} // namespace compiler::util::di
+} // namespace cpp_di

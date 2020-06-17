@@ -6,8 +6,8 @@
 #include <string>
 
 
-using namespace compiler::util::di;
-using namespace compiler::util::di::registration;
+using namespace cpp_di;
+using namespace cpp_di::registration;
 using namespace std;
 
 Container::Container()

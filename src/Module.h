@@ -2,7 +2,7 @@
 
 #include "Container.h"
 
-namespace compiler::util::di
+namespace cpp_di
 {
 	class Module
 	{
@@ -21,4 +21,4 @@ namespace compiler::util::di
 	};
 
 
-} // namespace compiler::util::di
+} // namespace cpp_di
