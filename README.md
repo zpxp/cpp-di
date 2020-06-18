@@ -33,7 +33,7 @@ int ic:
 
 
 // di module
-class LoggerModule : public util::di::Module
+class LoggerModule : public cpp_di::Module
 {
 public:
 	void Load() override;
