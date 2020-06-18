@@ -92,7 +92,7 @@ only cleaned up when the root scope is destructed.
 Add `-lcpp_di` to your compiler flags
 
 ### Advanced
-More complicated types can be constructed in the `Module::Load` implentation
+More complicated types can be constructed in the `Module::Load` implementation by passing a factory lambda to the `Register<>` function. Use this lambda along with the `cpp_di::Container& scope` scope argument to construct the required type.
 ```cpp
 void CompilationModule::Load()
 {
