@@ -27,7 +27,7 @@ set_target_properties(cpp_di PROPERTIES
     SOVERSION 1
 	 PUBLIC_HEADER src/Injector.h)
 	 
-install(DIRECTORY "${CMAKE_SOURCE_DIR}/" # source directory
+install(DIRECTORY ${SRC_DIR}/ # source directory
 	 DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cpp_di
 	 FILES_MATCHING # install only matched files
 	 PATTERN "*.h" # select header files
