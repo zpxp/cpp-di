@@ -14,11 +14,9 @@ sudo make install
 
 ### Use:
 
+*ILogger.h*
 ```cpp
-#include "cpp_di/Injector.h"
 
-
-// ILogger.h
 class ILogger
 {
 public:
@@ -27,13 +25,18 @@ public:
 	virtual void Message(const std::string& msg) = 0;
 	virtual ~ILogger(){};
 };
+```
 
+*Logger.h*
+```cpp
+#include "ILogger.h"
+#include <cpp_di/di.h>
 
-// Logger.h
 class Logger : public ILogger
 {
 private:
-int ic:
+	int member:
+
 	virtual void Warn(const std::string& msg) override;
 	virtual void Error(const std::string& msg ,bool terminate = false) override;
 	virtual void Message(const std::string& msg) override;
@@ -49,11 +52,13 @@ class LoggerModule : public cpp_di::Module
 public:
 	void Load() override;
 };
+```
 
+*Logger.cpp*
+``` cpp
+#include "Logger.h"
 
-// Logger.cpp
-
-/// ... implementation
+/// Logger implementation here ...
 
 // module implementation
 void LoggerModule::Load()

@@ -12,7 +12,7 @@ target_sources(cpp_di
       Module.cxx
       Registration.h
    PUBLIC
-      Injector.h
+      di.h
 )
 
 
