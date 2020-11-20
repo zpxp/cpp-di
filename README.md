@@ -78,7 +78,7 @@ root_container.RegisterModule(loggermod);
 
 The container instance can now be used to resolve an instance with `Resolve<>`
 ```cpp
-ILogger logger = root_container.Resolve<ILogger>();
+ILogger* logger = root_container.Resolve<ILogger>();
 ```
 
 Use `Container.NewScope` to create a sub scope that owns all instances created
