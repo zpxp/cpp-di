@@ -18,9 +18,6 @@ namespace cpp_di
 	{
 
 
-		template <class TYPE, class IFace, class... ARGS>
-		class RegistrationAs;
-
 		template <class TYPE, class... ARGS>
 		class RegistrationInstance;
 
@@ -131,9 +128,9 @@ namespace cpp_di
 
 			template <class IFace>
 			/* Resolve registered type as `IFace` */
-			Registration As() const
+			Registration<IFace, ARGS...> As() const
 			{
-				return RegistrationAs<TYPE, IFace, ARGS...>(this->container, std::type_index(typeid(IFace)), this->typeFactory, this->manageOwnInstances);
+				return RegistrationInstance<IFace, ARGS...>(this->container, std::type_index(typeid(IFace)), this->typeFactory, this->manageOwnInstances);
 			}
 
 			/*   make a new instance on every resolve*/
@@ -170,8 +167,6 @@ namespace cpp_di
 			template <class TYPE2, class... ARGS2>
 			friend class Registration;
 
-			template <class TYPE2, class IFace, class... ARGS2>
-			friend class RegistrationAs;
 
 		protected:
 			std::vector<TYPE*> instances;
@@ -218,36 +213,6 @@ namespace cpp_di
 						if (inst != NULL)
 							delete inst;
 				}
-			}
-		};
-
-
-		template <class TYPE, class IFace, class... ARGS>
-		/* override the GenerateInstance func to return as the Interface type */
-		class RegistrationAs : public RegistrationInstance<TYPE, ARGS...>
-		{
-			template <class TYPE2, class... ARGS2>
-			friend class Registration;
-
-		private:
-		protected:
-			RegistrationAs(Container* _container, const std::type_index& type, std::function<TYPE*(Container&, ARGS...)> const& factory, const bool manage)
-			: RegistrationInstance<TYPE, ARGS...>(_container, type, factory, manage)
-			{
-			}
-
-		public:
-			~RegistrationAs() = default;
-
-			IFace* GenerateInstance(const Container& scope, ARGS... args)
-			{
-				TYPE* inst = this->typeFactory(scope, args...);
-				auto exists = std::find(this->instances.begin(), this->instances.end(), inst);
-				if (exists == this->instances.end())
-				{
-					this->instances.push_back(inst);
-				}
-				return static_cast<IFace*>(inst);
 			}
 		};
 
